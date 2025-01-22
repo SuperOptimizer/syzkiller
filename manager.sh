@@ -55,5 +55,5 @@ setup_kernel
 cd /syzkiller
 cd workdir
 wget https://github.com/cmu-pasta/linux-kernel-enriched-corpus/releases/download/latest/corpus.db
-screen -dmS syzmanager ./syzkaller/bin/syz-manager -config "manager_${SANITIZER}.cfg"
-echo "Manager started in screen session 'syzmanager'"
+nohup syzmanager ./syzkaller/bin/syz-manager -config "manager_${SANITIZER}.cfg" &
+echo "Manager started"
