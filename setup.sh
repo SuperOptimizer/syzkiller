@@ -54,12 +54,15 @@ setup_kernel() {
 
 if [ "$MODE" = "hub" ]; then
     cd /syzkiller
+    cd hubworkdir
+    wget https://github.com/cmu-pasta/linux-kernel-enriched-corpus/releases/download/latest/corpus.db
     #screen -dmS syzhub ./syzkaller/bin/syz-hub -config hub.cfg
     #echo "Hub started in screen session 'syzhub'"
 else
     setup_kernel
     cd /syzkiller
-    ./create-image.sh
+    cd workdir
+    wget https://github.com/cmu-pasta/linux-kernel-enriched-corpus/releases/download/latest/corpus.db
     #screen -dmS syzmanager ./syzkaller/bin/syz-manager -config "manager_${SANITIZER}.cfg"
     #echo "Manager started in screen session 'syzmanager'"
 fi
