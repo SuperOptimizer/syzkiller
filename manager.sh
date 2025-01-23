@@ -43,8 +43,8 @@ setup_kernel() {
     cp "/syzkiller/${SANITIZER}.config" .config
 
     if [ "$SANITIZER" = "kmsan" ]; then
-        make olddefconfig CC=clang LD=ld.lld LLVM=1
-        make -j$(nproc) CC=clang LD=ld.lld LLVM=1
+        make olddefconfig  LLVM=1
+        make -j$(nproc) LLVM=1
     else
         make olddefconfig
         make -j$(nproc)
