@@ -42,8 +42,8 @@ setup_kernel() {
     cd "$KERNEL_DIR"
     cp "/syzkiller/${SANITIZER}.config" .config
 
-    make olddefconfig  LLVM=1
-    make -j$(nproc) LLVM=1
+    make olddefconfig
+    make -j$(nproc)
 
 }
 
