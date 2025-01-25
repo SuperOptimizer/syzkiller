@@ -42,18 +42,13 @@ setup_kernel() {
     cd "$KERNEL_DIR"
     cp "/syzkiller/${SANITIZER}.config" .config
 
-    if [ "$SANITIZER" = "kmsan" ]; then
-        make olddefconfig  LLVM=1
-        make -j$(nproc) LLVM=1
-    else
-        make olddefconfig
-        make -j$(nproc)
-    fi
+    make olddefconfig  LLVM=1
+    make -j$(nproc) LLVM=1
+
 }
 
 setup_kernel
 cd /syzkiller
 cd workdir
-wget https://github.com/cmu-pasta/linux-kernel-enriched-corpus/releases/download/latest/corpus.db
-nohup syzmanager ./syzkaller/bin/syz-manager -config "manager_${SANITIZER}.cfg" &> out_manager.txt &
+#nohup syzmanager ./syzkaller/bin/syz-manager -config "manager_${SANITIZER}.cfg" &> out_manager.txt &
 echo "Manager started"
