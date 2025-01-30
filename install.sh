@@ -1,5 +1,5 @@
 apt-get update
-apt-get install -y git curl make gcc wget clang llvm
+apt-get install -y git curl make gcc wget clang llvm g++
 
 GO_VERSION="1.21.5"
 
