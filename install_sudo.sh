@@ -13,7 +13,7 @@ sudo ln -s /usr/bin/llvm-nm-20 /usr/local/bin/llvm-nm
 sudo ln -s /usr/bin/llvm-ar-20 /usr/local/bin/llvm-ar
 sudo ln -s /usr/bin/clang-20 /usr/local/bin/clang
 
-GO_VERSION="1.21.5"
+GO_VERSION="1.23.5"
 wget "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz"
 rm -rf /usr/local/go
 tar -C /usr/local -xzf "go${GO_VERSION}.linux-amd64.tar.gz"
