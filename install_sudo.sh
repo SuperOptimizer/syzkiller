@@ -3,7 +3,11 @@
 set -eux
 
 apt-get update
-apt-get install -y git curl make gcc wget clang llvm g++ flex bison libelf-dev libssl-dev pkg-config
+apt-get install -y git curl make gcc wget g++ flex bison libelf-dev libssl-dev pkg-config
+
+wget https://apt.llvm.org/llvm.sh
+chmod +x llvm.sh
+sudo ./llvm.sh 20 all
 
 GO_VERSION="1.21.5"
 wget "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz"
