@@ -2,49 +2,42 @@
 set -eux
 
 SANITIZER="nosan"
-KERNEL_VERSION="6.13"
+REPO_URL="git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
+KERNEL_DIR="linux"
 
 usage() {
-    echo "Usage: $0 [--sanitizer TYPE]"
-    echo "Sanitizer types: kasan, kcsan, kmsan, nosan, ubsan"
-    exit 1
+   echo "Usage: $0 [--sanitizer TYPE]"
+   echo "Sanitizer types: kasan, kcsan, kmsan, nosan, ubsan"
+   exit 1
 }
 
 while [[ $# -gt 0 ]]; do
-    case $1 in
-        --sanitizer)
-            SANITIZER="$2"
-            shift 2
-            ;;
-        *)
-            usage
-            ;;
-    esac
+   case $1 in
+       --sanitizer)
+           SANITIZER="$2"
+           shift 2
+           ;;
+       *)
+           usage
+           ;;
+   esac
 done
 
 setup_kernel() {
-    cd /syzkiller
-    KERNEL_TAR="linux-${KERNEL_VERSION}.tar.xz"
-    KERNEL_DIR="linux-${KERNEL_VERSION}"
+   cd /syzkiller
 
-    # Download kernel only if tar doesn't exist
-    if [ ! -f "$KERNEL_TAR" ]; then
-        wget "https://cdn.kernel.org/pub/linux/kernel/v6.x/$KERNEL_TAR"
-    fi
+   if [ -d "$KERNEL_DIR" ]; then
+       cd "$KERNEL_DIR"
+       git pull
+   else
+       git clone --depth 1 "$REPO_URL" "$KERNEL_DIR"
+       cd "$KERNEL_DIR"
+   fi
 
-    # Remove existing kernel directory if it exists
-    if [ -d "$KERNEL_DIR" ]; then
-        rm -rf "$KERNEL_DIR"
-    fi
-
-    # Extract fresh copy
-    tar xf "$KERNEL_TAR"
-    cd "$KERNEL_DIR"
-    cp "/syzkiller/${SANITIZER}.config" .config
-
-    make olddefconfig
-    make -j$(nproc)
-
+   make mrproper
+   cp "/syzkiller/${SANITIZER}.config" .config
+   make olddefconfig
+   make -j$(nproc)
 }
 
 setup_kernel
