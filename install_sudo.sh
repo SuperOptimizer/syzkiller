@@ -1,6 +1,6 @@
 set -x
 apt-get update
-apt-get install -y git curl make gcc wget g++ flex bison libelf-dev libssl-dev pkg-config
+apt-get install -y git curl make gcc wget g++ flex bison libelf-dev libssl-dev pkg-config debootstrap software-properties-common
 
 wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
