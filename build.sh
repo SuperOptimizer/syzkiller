@@ -4,7 +4,7 @@ set -eux
 
 export PATH=/usr/local/go/bin:$PATH
 
-SANITIZER="nosan"
+SANITIZER="kasan"
 KERNEL_DIR="linux"
 
 usage() {
