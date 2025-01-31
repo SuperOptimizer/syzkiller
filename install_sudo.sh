@@ -1,6 +1,4 @@
-#!/bin/bash
-# install_root.sh
-
+set -x
 apt-get update
 apt-get install -y git curl make gcc wget g++ flex bison libelf-dev libssl-dev pkg-config
 

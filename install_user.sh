@@ -1,5 +1,4 @@
-#!/bin/bash
-# install_user.sh
+set -x
 
 export PATH=/usr/local/go/bin:$PATH
 cd /syzkiller

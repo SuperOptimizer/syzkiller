@@ -1,7 +1,4 @@
-#!/bin/bash
-# build.sh
-
-
+set -x
 export PATH=/usr/local/go/bin:$PATH
 
 SANITIZER="kasan"
