@@ -1,6 +1,6 @@
 #!/bin/bash
 # build.sh
-set -eux
+
 
 export PATH=/usr/local/go/bin:$PATH
 
