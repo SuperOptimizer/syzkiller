@@ -42,6 +42,7 @@ setup_kernel() {
 
 build_syzkaller() {
     cd /syzkiller/syzkaller
+    git pull
     make
 }
 
