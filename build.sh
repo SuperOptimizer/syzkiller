@@ -2,6 +2,8 @@
 # build.sh
 set -eux
 
+export PATH=/usr/local/go/bin:$PATH
+
 SANITIZER="nosan"
 KERNEL_DIR="linux"
 
@@ -49,5 +51,4 @@ build_syzkaller() {
 setup_kernel
 build_syzkaller
 cd /syzkiller/workdir
-#nohup syzmanager ./syzkaller/bin/syz-manager -config "manager_${SANITIZER}.cfg" &> out_manager.txt &
 echo "Manager started"
