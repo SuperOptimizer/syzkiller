@@ -5,7 +5,7 @@ apt-get install -y git curl make gcc wget g++ flex bison libelf-dev libssl-dev p
 wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
 ./llvm.sh 20 all
-n -s /usr/bin/llvm-objcopy-20 /usr/local/bin/llvm-objcopy
+ln -s /usr/bin/llvm-objcopy-20 /usr/local/bin/llvm-objcopy
 ln -s /usr/bin/llvm-nm-20 /usr/local/bin/llvm-nm
 ln -s /usr/bin/llvm-ar-20 /usr/local/bin/llvm-ar
 ln -s /usr/bin/clang-20 /usr/local/bin/clang
