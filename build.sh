@@ -52,9 +52,9 @@ setup_kernel() {
             ;;
     esac
 
-    make mrproper
+    make mrproper LLVM=1
     cp "$CONFIG_FILE" .config
-    make olddefconfig
+    make olddefconfig LLVM=1
     make -j$(nproc) LLVM=1
 }
 build_syzkaller() {
