@@ -4,7 +4,7 @@ SANITIZER="kasan"
 KERNEL_DIR="linux"
 usage() {
     echo "Usage: $0 [--sanitizer TYPE]"
-    echo "Sanitizer types: kasan, kcsan, kmsan, nosan, ubsan"
+    echo "Sanitizer types: kasan, kcsan, kmsan, lsan"
     exit 1
 }
 while [[ $# -gt 0 ]]; do
@@ -40,10 +40,7 @@ setup_kernel() {
         kmsan)
             CONFIG_FILE="/syzkiller/syzkaller/dashboard/config/linux/upstream-kmsan.config"
             ;;
-        nosan)
-            CONFIG_FILE="/syzkiller/syzkaller/dashboard/config/linux/upstream-allyes.config"
-            ;;
-        ubsan)
+        lsan)
             CONFIG_FILE="/syzkiller/syzkaller/dashboard/config/linux/upstream-leak.config"
             ;;
         *)
