@@ -36,7 +36,7 @@ setup_kernel() {
     make mrproper
     cp "/syzkiller/${SANITIZER}.config" .config
     make olddefconfig
-    make -j$(nproc)
+    make -j$(nproc) LLVM=1
 }
 
 build_syzkaller() {
@@ -47,5 +47,5 @@ build_syzkaller() {
 
 setup_kernel
 build_syzkaller
-cd /syzkiller/workdir
-echo "Manager started"
+#cd /syzkiller/workdir
+#echo "Manager started"
