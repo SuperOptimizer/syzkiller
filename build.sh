@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-CONFIG_FILE="kasan.config"
+CONFIG_FILE="/syzkiller/kasan.config"
 EXTRA_CONFIG="
 
 CONFIG_UBSAN=y
@@ -57,7 +57,7 @@ echo "$EXTRA_CONFIG" >> .config
 make olddefconfig $LLVM_FLAG
 make -j$(nproc) $LLVM_FLAG
 
-
+cd /syzkiller/
 rm -rf syzkaller
 git clone --depth 1 https://github.com/google/syzkaller
 cd /syzkiller/syzkaller
