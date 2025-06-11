@@ -25,6 +25,7 @@ CONFIG_UBSAN_SHIFT=y
 CONFIG_UBSAN_SIGNED_WRAP=y
 CONFIG_UBSAN_TRAP=y
 CONFIG_UBSAN_UNREACHABLE=y
+CONFIG_LTO_CLANG_THIN=y
 
 "
 
@@ -32,8 +33,8 @@ CONFIG_UBSAN_UNREACHABLE=y
 cd /syzkiller/linux
 cp "$CONFIG_FILE" .config
 echo "$EXTRA_CONFIG" >> .config
-make olddefconfig
-make -j$(nproc)
+make olddefconfig LLVM=1
+make -j$(nproc) LLVM=1
 
 cd /syzkiller/syzkaller
 git pull
