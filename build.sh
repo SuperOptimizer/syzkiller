@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-CONFIG_FILE="/syzkiller/syzkaller/dashboard/config/linux/upstream-kasan-badwrites.config"
+CONFIG_FILE="kasan.config"
 EXTRA_CONFIG="
 
 CONFIG_UBSAN=y
@@ -49,15 +49,17 @@ fi
 export PATH=/usr/local/go/bin:$PATH
 cd /syzkiller
 rm -rf linux
-rm -rf syzkaller
 git clone --depth 1 git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
-git clone --depth 1 https://github.com/google/syzkaller
 
 cd /syzkiller/linux
 cp "$CONFIG_FILE" .config
 echo "$EXTRA_CONFIG" >> .config
 make olddefconfig $LLVM_FLAG
 make -j$(nproc) $LLVM_FLAG
+
+
+rm -rf syzkaller
+git clone --depth 1 https://github.com/google/syzkaller
 cd /syzkiller/syzkaller
 git pull
-make
+make all kconf
